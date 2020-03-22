@@ -1,0 +1,68 @@
+
+<ngx-spinner
+bdOpacity = 1
+bdColor = "#333"
+size = "medium"
+color = "#fff"
+type = "ball-8bits"
+[fullScreen] = "true"
+>
+<p style="color: white" > Please wash your hands :) </p>
+</ngx-spinner>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                <div class="card-header text-center">Statictics taken on</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{ dateVal | date:'medium' }} </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">Total Cases Worldwide</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{results.total_cases}} </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                <div class="card-header text-center">Total Deaths</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{results.total_deaths}} </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                <div class="card-header text-center">Total Recovered</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{results.total_recovered}} </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                <div class="card-header text-center">Total New Cases</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{results.new_cases}} </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                <div class="card-header text-center">New Deaths</div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"> {{results.new_deaths}} </h3>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    
+</div>

@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(230, 230, 230);
+  position:relative; 
+}
+.mat-form-field {
+    color: black;
+    background-color: rgb(217, 217, 217);
+}
+.mat-form-field-empty .mat-form-field-label {
+    color: black;
+}
+.mat-form-field-underline::before {
+    background-color: black;
+}
+.mat-form-field-underline::after {
+    background-color: red;
+}
+.fa {
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+#footer {
+  height: 50px;
+  margin-top: -50px;
+}
