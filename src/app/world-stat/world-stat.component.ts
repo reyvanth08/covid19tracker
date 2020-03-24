@@ -13,25 +13,22 @@ export class WorldStatComponent implements OnInit {
   results;
 
   constructor(private backendService: BackendServicesService,  private spinner: NgxSpinnerService) {
-    this.spinner.show();
-    
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 5000);
   }
    
 
-  ngOnInit() {
-    
+  ngOnInit() { 
     this.worldStat();
-    
-}
+  }
 
   worldStat() {
+    this.spinner.show();
     this.backendService.getWorldData().then(data => {
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 5000);
       this.results = data;
       console.log(data);
+      
     });
-    
   }
 }

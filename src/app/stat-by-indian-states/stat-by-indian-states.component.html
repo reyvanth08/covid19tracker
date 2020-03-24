@@ -1,0 +1,156 @@
+<ngx-spinner bdOpacity=1 bdColor="#333" size="medium" color="#fff" type="ball-8bits" [fullScreen]="true">
+    <p style="color: white"> Did you wash your hands? </p>
+</ngx-spinner>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="mat-h2 text-center">Search by state name: </p>
+            <button class="text-center my-class" (click)="showSearch()" *ngIf="!showSearchBar" mat-raised-button
+                color="warn">Show statictics of individual states</button>
+            <button class="text-center my-class" *ngIf="showSearchBar" (click)="hideSearch()" mat-raised-button
+                color="warn">Hide statictics</button>
+            <br><br>
+            <form class="example-form" id="search-form" class="text-center" *ngIf="showSearchBar">
+                <mat-form-field appearance="fill">
+                    <mat-label style="color: black;">Enter here</mat-label>
+                    <input type="text" matInput placeholder="Country" [formControl]="myControl" [matAutocomplete]="auto"
+                        width="100%">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="stateStatistics($event.option.value)">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+        <br><br>
+        <div class="col-sm-6">
+            <p class="mat-h2 text-center"> Check statictics of all states: </p>
+            <button class="text-center my-class" (click)="showData()" *ngIf="!showStat" mat-raised-button
+                color="warn">Show statictics of all states</button>
+            <button class="text-center my-class" *ngIf="showStat" (click)="hideData()" mat-raised-button
+                color="warn">Hide statictics</button>
+        </div>
+        <br><br>
+        <div class="col-sm-12">
+            <ng-container *ngIf="showStat">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                    
+                    <ng-container matColumnDef="loc">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+                        <td mat-cell *matCellDef="let element"> {{element.loc}} </td>
+                    </ng-container>
+
+                    
+                    <ng-container matColumnDef="confirmedCasesIndian">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed Indian Cases </th>
+                        <td mat-cell *matCellDef="let element"> {{element.confirmedCasesIndian}} </td>
+                    </ng-container>
+
+                    
+                    <ng-container matColumnDef="confirmedCasesForeign">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed Foreign Cases </th>
+                        <td mat-cell *matCellDef="let element"> {{element.confirmedCasesForeign}} </td>
+                    </ng-container>
+
+                    
+                    <ng-container matColumnDef="discharged">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Discharged </th>
+                        <td mat-cell *matCellDef="let element"> {{element.discharged}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="deaths">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Deaths </th>
+                        <td mat-cell *matCellDef="let element"> {{element.deaths}} </td>
+                    </ng-container>deaths
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </ng-container>
+            <br><br>
+        </div>
+        <br><br>
+        <div class="row">
+            <ng-container *ngIf="showStateData">
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                        <div class="card-header text-center">State</div>
+                        <div class="card-body">
+                            <h3 class="card-title text-center">{{stateStat.loc}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                        <div class="card-header text-center">Statictics taken on</div>
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{ dateVal | date:'medium' }} </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20rem;">
+                        <div class="card-header text-center">Confirmed Indian Cases</div>
+                        <div class="card-body">
+                            <!-- <h3 class="card-title text-center"> {{stateStat.confirmedCasesIndian}} </h3> -->
+                            <h3 class="card-title text-center"> {{stateStat.confirmedCasesIndian}} </h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                        <div class="card-header text-center">Confirmed Foreign Cases</div>
+                        <div class="card-body">
+                            <h3 class="card-title text-center">
+                                {{stateStat.confirmedCasesForeign}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                        <div class="card-header text-center">Discharged</div>
+                        <div class="card-body">
+                            <h3 class="card-title text-center">
+                                {{stateStat.discharged}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                        <div class="card-header text-center">Deaths</div>
+                        <div class="card-body">
+                            <h3 class="card-title text-center"> {{stateStat.deaths}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                        <div class="card text-white bg-secondary  mb-3" style="max-width: 20em;">
+                            <div class="card-header text-center">Total cases</div>
+                            <div class="card-body">
+                                <h3 class="card-title text-center"> {{stateStat.confirmedCasesIndian + stateStat.confirmedCasesForeign}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+            </ng-container>
+        </div>
+        <br><br>
+        <!-- 
+        <ng-container *ngIf="noCasesFound">
+            <div class="col-md-12">
+                <div class="card text-white bg-secondary  mb-3">
+                    <div class="card-header text-center">State</div>
+                    <div class="card-body">
+                        <h3 class="card-title text-center">No cases found </h3>
+                    </div>
+                </div>
+            </div>
+        </ng-container> -->
+    </div>
+</div>

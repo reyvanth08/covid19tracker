@@ -44,4 +44,15 @@ export class BackendServicesService {
       });
     });
   }
+
+  getIndianData() {
+    return new Promise(resolve => {
+      this._httpClient.get(this.getAPI.INDIANSTATISTICS).subscribe((response) => {
+        console.log(response);
+        resolve(response);
+      }, err => {
+        console.log(JSON.stringify(err));
+      });
+    });
+  }
 }

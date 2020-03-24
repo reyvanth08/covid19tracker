@@ -38,10 +38,11 @@ export class StatByCountryComponent implements OnInit {
     this.backendService.getCountryData(countryChosen).then(data => {
       this.results = data;
       console.log(this.results);
-    });
-    setTimeout(() => {
+      setTimeout(() => {
       this.spinner.hide();
     }, 5000);
+    });
+    
   }
 
 }
